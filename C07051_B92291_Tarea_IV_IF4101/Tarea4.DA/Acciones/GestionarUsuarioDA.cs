@@ -46,22 +46,22 @@ namespace Tarea4.DA.Acciones
 
         public async Task<bool> registrarUsuario(Usuario usuario)
         {
-            //Entidades.UsuarioDA usuarioBD = new()
-            //{
-            //    idUsuario = usuario.idUsuario,
-            //    nombre = usuario.nombre,
-            //    apellidos = usuario.apellidos,
-            //    fechaNacimiento = usuario.fechaNacimiento,
-            //    correo = usuario.correo,
-            //    contrasenna = usuario.contrasenna
-            //};
+            Entidades.UsuarioDA usuarioBD = new()
+            {
+                idUsuario = usuario.idUsuario,
+                nombre = usuario.nombre,
+                apellidos = usuario.apellidos,
+                fechaNacimiento = usuario.fechaNacimiento,
+                correo = usuario.correo,
+                contrasenna = usuario.contrasenna
+            };
 
-            //await tarea4Context.TareaDA.AddAsync(tareaBD);
+            await tarea4Context.UsuarioDA.AddAsync(usuarioBD);
 
-            //var resultado = await admTareaContext.SaveChangesAsync();
+            var resultado = await tarea4Context.SaveChangesAsync();
 
-            //if (resultado < 0)
-            //    return false;
+            if (resultado < 0)
+                return false;
 
             return true;
         }

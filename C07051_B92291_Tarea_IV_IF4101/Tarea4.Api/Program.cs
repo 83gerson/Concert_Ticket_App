@@ -15,6 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Inyección de Dependencias
+builder.Services.AddTransient<IGestionarUsuarioBW, GestionarUsuarioBW>();
+builder.Services.AddTransient<IGestionarUsuarioDA, GestionarUsuarioDA>();
 builder.Services.AddTransient<IGestionarConciertoBW, GestionarConciertoBW>();
 builder.Services.AddTransient<IGestionarConciertoDA, GestionarConciertoDA>();
 
