@@ -29,6 +29,8 @@ namespace Tarea4.DA.Entidades
 
         public virtual ICollection<ConciertoAsientoDA> ConciertoAsientoDA { get; set; } = new List<ConciertoAsientoDA>();
 
+        public virtual ICollection<ConciertoZonaDA> ConciertoZonaDA { get; set; } = new List<ConciertoZonaDA>();
+
         public virtual ICollection<ReservaDA> ReservaDA { get; set; } = new List<ReservaDA>();
     }
 }

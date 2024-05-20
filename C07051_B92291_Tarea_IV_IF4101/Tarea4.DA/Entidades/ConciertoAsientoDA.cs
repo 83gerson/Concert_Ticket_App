@@ -16,10 +16,7 @@ namespace Tarea4.DA.Entidades
         public int idConciertoAsiento { get; set; }
 
         [Required]
-        public string tipo { get; set; }
-
-        [Required]
-        public decimal precio { get; set; }
+        public int idZona { get; set; }
 
         [Required]
         public int idConcierto { get; set; }
@@ -27,13 +24,14 @@ namespace Tarea4.DA.Entidades
         [Required]
         public int idAsiento { get; set; }
 
+        [ForeignKey("idZona")]
+        public virtual ConciertoZonaDA ConciertoZonaAsociado { get; set; } = null!;
+
         [ForeignKey("idConcierto")]
         public virtual ConciertoDA ConciertoAsociado { get; set; } = null!;
 
         [ForeignKey("idAsiento")]
         public virtual AsientoDA AsientoAsociado { get; set; } = null!;
-
-        public virtual ICollection<ReservaDA> ReservaDA { get; set; } = new List<ReservaDA>();
     }
 
 }

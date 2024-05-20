@@ -11,7 +11,6 @@ namespace Tarea4.DA.Entidades
     [Table("Reserva")]
     public class ReservaDA
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public int idReserva { get; set; }
 
@@ -25,13 +24,13 @@ namespace Tarea4.DA.Entidades
         public int idAsiento { get; set; }
 
         [ForeignKey("idUsuario")]
-        public virtual UsuarioDA Usuario { get; set; } = null!;
+        public virtual UsuarioDA UsuarioAsociado { get; set; } = null!;
 
         [ForeignKey("idConcierto")]
-        public virtual ConciertoDA Concierto { get; set; } = null!;
+        public virtual ConciertoDA ConciertoAsociado { get; set; } = null!;
 
         [ForeignKey("idAsiento")]
-        public virtual ConciertoAsientoDA ConciertoAsiento { get; set; } = null!;
+        public virtual ConciertoAsientoDA ConciertoAsientoAsociado { get; set; } = null!;
     }
 
 }
