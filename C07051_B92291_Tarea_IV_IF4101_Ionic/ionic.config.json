@@ -1,0 +1,7 @@
+{
+  "name": "C07051_B92291_Tarea_IV_IF4101_Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
