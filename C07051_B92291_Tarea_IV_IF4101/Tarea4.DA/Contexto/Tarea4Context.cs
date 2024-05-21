@@ -19,6 +19,8 @@ namespace Tarea4.DA.Contexto
         public DbSet<UsuarioDA> UsuarioDA { get; set; }
         public DbSet <ConciertoDA> ConciertoDA { get;set; }
         public DbSet<AsientoDA> AsientoDA { get; set;}
+        public DbSet<ZonaDA> ZonaDA { get; set; }
+        public DbSet<ConciertoZonaDA> conciertoZonaDA { get; set; }
         public DbSet<ConciertoAsientoDA> conciertoAsientoDA { get; set; }
         public DbSet<ReservaDA> ReservaDA { get; set;}
 

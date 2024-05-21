@@ -15,8 +15,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Inyección de Dependencias
+builder.Services.AddTransient<IGestionarUsuarioBW, GestionarUsuarioBW>();
+builder.Services.AddTransient<IGestionarUsuarioDA, GestionarUsuarioDA>();
 builder.Services.AddTransient<IGestionarConciertoBW, GestionarConciertoBW>();
 builder.Services.AddTransient<IGestionarConciertoDA, GestionarConciertoDA>();
+builder.Services.AddTransient<IGestionarAsientoBW, GestionarAsientoBW>();
+builder.Services.AddTransient<IGestionarAsientoDA, GestionarAsientoDA>();
 
 
 //Conexión a BD
