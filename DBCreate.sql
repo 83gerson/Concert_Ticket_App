@@ -48,7 +48,7 @@ CREATE TABLE Concierto_Asiento
 	, idConcierto INT NOT NULL
 	, idAsiento INT NOT NULL
 	, FOREIGN KEY (idConcierto) REFERENCES Concierto(idConcierto)
-	, FOREIGN KEY (idZona) REFERENCES Concierto_Zona(idConciertoZona)
+	, FOREIGN KEY (idZona) REFERENCES Zona(idZona)
 	, FOREIGN KEY (idAsiento) REFERENCES Asiento(idAsiento)
 )
 
@@ -60,7 +60,7 @@ CREATE TABLE Reserva
 	, idAsiento INT NOT NULL
 	, FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
 	, FOREIGN KEY (idConcierto) REFERENCES Concierto(idConcierto)
-	, FOREIGN KEY (idAsiento) REFERENCES Concierto_Asiento(idConciertoAsiento)
+	, FOREIGN KEY (idAsiento) REFERENCES Asiento(idAsiento)
 	, CONSTRAINT PK_Reserva PRIMARY KEY (idReserva, idUsuario, idConcierto, idAsiento)
 )
 
@@ -114,23 +114,23 @@ VALUES (1, 1, 1), (1, 1, 2), (1, 1, 3), (1, 1, 4), (1, 1, 5),
 
 -- Concierto 2
 INSERT INTO Concierto_Asiento (idZona, idConcierto, idAsiento)
-VALUES (6, 2, 1), (6, 2, 2), (6, 2, 3), (6, 2, 4), (6, 2, 5),
-       (7, 2, 6), (7, 2, 7), (7, 2, 8), (7, 2, 9), (7, 2, 10),
-       (8, 2, 11), (8, 2, 12), (8, 2, 13), (8, 2, 14), (8, 2, 15),
-       (9, 2, 16), (9, 2, 17), (9, 2, 18), (9, 2, 19), (9, 2, 20),
-       (10, 2, 21), (10, 2, 22), (10, 2, 23), (10, 2, 24), (10, 2, 25),
-       (6, 2, 26), (7, 2, 27), (8, 2, 28), (9, 2, 29), (10, 2, 30),
-       (6, 2, 31), (2, 2, 32);
+VALUES (1, 2, 1), (1, 2, 2), (1, 2, 3), (1, 2, 4), (1, 2, 5),
+       (2, 2, 6), (2, 2, 7), (2, 2, 8), (2, 2, 9), (2, 2, 10),
+       (3, 2, 11), (3, 2, 12), (3, 2, 13), (3, 2, 14), (3, 2, 15),
+       (4, 2, 16), (4, 2, 17), (4, 2, 18), (4, 2, 19), (4, 2, 20),
+       (5, 2, 21), (5, 2, 22), (5, 2, 23), (5, 2, 24), (5, 2, 25),
+       (1, 2, 26), (2, 2, 27), (3, 2, 28), (4, 2, 29), (5, 2, 30),
+       (1, 2, 31), (2, 2, 32);
 
 -- Concierto 3
 INSERT INTO Concierto_Asiento (idZona, idConcierto, idAsiento)
-VALUES (11, 3, 1), (11, 3, 2), (11, 3, 3), (11, 3, 4), (11, 3, 5),
-       (12, 3, 6), (12, 3, 7), (12, 3, 8), (12, 3, 9), (12, 3, 10),
-       (13, 3, 11), (13, 3, 12), (13, 3, 13), (13, 3, 14), (13, 3, 15),
-       (14, 3, 16), (14, 3, 17), (14, 3, 18), (14, 3, 19), (14, 3, 20),
-       (15, 3, 21), (15, 3, 22), (15, 3, 23), (15, 3, 24), (15, 3, 25),
-       (11, 3, 26), (12, 3, 27), (13, 3, 28), (14, 3, 29), (15, 3, 30),
-       (11, 3, 31), (12, 3, 32);
+VALUES (1, 3, 1), (1, 3, 2), (1, 3, 3), (1, 3, 4), (1, 3, 5),
+       (2, 3, 6), (2, 3, 7), (2, 3, 8), (2, 3, 9), (2, 3, 10),
+       (3, 3, 11), (3, 3, 12), (3, 3, 13), (3, 3, 14), (3, 3, 15),
+       (4, 3, 16), (4, 3, 17), (4, 3, 18), (4, 3, 19), (4, 3, 20),
+       (5, 3, 21), (5, 3, 22), (5, 3, 23), (5, 3, 24), (5, 3, 25),
+       (1, 3, 26), (2, 3, 27), (3, 3, 28), (4, 3, 29), (5, 3, 30),
+       (1, 3, 31), (2, 3, 32);
 
 --Reserva
 INSERT INTO Reserva (idReserva, idUsuario, idConcierto, idAsiento)

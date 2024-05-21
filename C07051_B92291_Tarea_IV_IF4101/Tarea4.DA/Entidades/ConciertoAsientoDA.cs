@@ -25,7 +25,7 @@ namespace Tarea4.DA.Entidades
         public int idAsiento { get; set; }
 
         [ForeignKey("idZona")]
-        public virtual ConciertoZonaDA ConciertoZonaAsociado { get; set; } = null!;
+        public virtual ZonaDA ZonaAsociado { get; set; } = null!;
 
         [ForeignKey("idConcierto")]
         public virtual ConciertoDA ConciertoAsociado { get; set; } = null!;

@@ -30,7 +30,7 @@ namespace Tarea4.DA.Entidades
         public virtual ConciertoDA ConciertoAsociado { get; set; } = null!;
 
         [ForeignKey("idAsiento")]
-        public virtual ConciertoAsientoDA ConciertoAsientoAsociado { get; set; } = null!;
+        public virtual AsientoDA AsientoAsociado { get; set; } = null!;
     }
 
 }

@@ -29,7 +29,5 @@ namespace Tarea4.DA.Entidades
 
         [ForeignKey("idZona")]
         public virtual ZonaDA Zona { get; set; } = null!;
-
-        public virtual ICollection<ConciertoAsientoDA> ConciertoAsientoDA { get; set; } = new List<ConciertoAsientoDA>();
     }
 }
