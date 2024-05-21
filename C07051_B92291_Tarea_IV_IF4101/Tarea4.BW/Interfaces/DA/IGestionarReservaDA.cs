@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tarea4.BC.Modelos;
+
+namespace Tarea4.BW.Interfaces.DA
+{
+    public interface IGestionarReservaDA
+    {
+        Task<IEnumerable<Reserva>> listarReservasPorUsuario(int idUsuario);
+        Task<int> buscarIdDisponible();
+        Task<decimal> calcularTotal(int idReserva);
+    }
+}
