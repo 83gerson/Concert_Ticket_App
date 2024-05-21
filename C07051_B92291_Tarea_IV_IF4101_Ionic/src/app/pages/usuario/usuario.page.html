@@ -9,10 +9,10 @@
       <h1>SHOWS</h1>
     </div>
 
-    <form >
-      <ion-input type="email" placeholder="Correo"></ion-input>
-      <ion-input type="password" placeholder="Contraseña"></ion-input>
-      <ion-button expand="block" class="login-button" type="submit" (click)="login()">Iniciar sesión</ion-button>
+    <form>
+      <ion-input #emailInput type="email" placeholder="Correo"></ion-input>
+      <ion-input #passwordInput type="password" placeholder="Contraseña"></ion-input>
+      <ion-button expand="block" class="login-button" type="button" (click)="login()">Iniciar sesión</ion-button>
       <ion-button expand="block" fill="outline" class="register-button" (click)="register()">Registrarse</ion-button>
     </form>
     
