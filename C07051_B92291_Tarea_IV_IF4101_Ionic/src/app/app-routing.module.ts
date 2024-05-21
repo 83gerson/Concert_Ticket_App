@@ -6,7 +6,7 @@ const routes: Routes = [
     // path: 'home',
     // loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
      path: 'usuario',
-    loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule)
+    loadChildren: () => import('./pages/usuario/usuario.module').then( m => m.UsuarioPageModule)
   },
   {
     path: '',
@@ -16,15 +16,15 @@ const routes: Routes = [
   },
   {
     path: 'usuario',
-    loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule)
+    loadChildren: () => import('./pages/usuario/usuario.module').then( m => m.UsuarioPageModule)
   },
   {
     path: 'concierto',
-    loadChildren: () => import('./concierto/concierto.module').then( m => m.ConciertoPageModule)
+    loadChildren: () => import('./pages/concierto/concierto.module').then( m => m.ConciertoPageModule)
   },
   {
     path: 'registrarse',
-    loadChildren: () => import('./registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
+    loadChildren: () => import('./pages/registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
   },
 ];
 
