@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'concierto',
     loadChildren: () => import('./concierto/concierto.module').then( m => m.ConciertoPageModule)
   },
+  {
+    path: 'registrarse',
+    loadChildren: () => import('./registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
+  },
 ];
 
 @NgModule({
