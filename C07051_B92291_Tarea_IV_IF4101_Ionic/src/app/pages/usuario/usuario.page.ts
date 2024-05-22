@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInput } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -8,14 +8,18 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: 'usuario.page.html',
   styleUrls: ['usuario.page.scss'],
 })
-export class UsuarioPage{
-
-  constructor(private router: Router, private usuarioService: UsuarioService) {}
+export class UsuarioPage {
 
   @ViewChild('emailInput', { static: false }) emailInput!: IonInput;
   @ViewChild('passwordInput', { static: false }) passwordInput!: IonInput;
 
-  usuario = null as any;
+  usuario: any = null;
+
+  constructor(private router: Router, private usuarioService: UsuarioService) {}
+
+  ionViewWillEnter(): void {
+    this.limpiarCampos();
+  }
 
   login() {
     const email = this.emailInput.value?.toString();
@@ -23,7 +27,15 @@ export class UsuarioPage{
     // Verificamos los datos del formulario
     if (email !== undefined && password !== undefined) {
       this.usuarioService.buscarUsuario(email, password).subscribe(response => {
-        if (response!=null) {
+        // console.log(response);
+        // this.usuarioService.asignarUsuarioSesion(response);
+        // console.log(JSON.stringify(this.usuarioService.retornarUsuarioSesion()));
+        // this.usuario = this.usuarioService.retornarUsuarioSesion();
+        // if (this.usuario!=null) {
+          
+        //   this.router.navigate(['/concierto'])
+        // }
+        if (response != null) {
           // Obtenemos el usuario
           this.usuario = response;
           // Se crean los datos necesarios para guardar en la sesión
@@ -37,7 +49,7 @@ export class UsuarioPage{
           // Se guarda en sesión
           sessionStorage.setItem('usuarioSesion', JSON.stringify(datosUsuario));
           // Se pasa a la siguiente página
-          this.router.navigate(['/concierto'])
+          this.router.navigate(['/concierto']);
         }
       });
     }
@@ -45,6 +57,15 @@ export class UsuarioPage{
 
   register() {
     console.log('Registrarse');
-    this.router.navigate(['/registrarse'])
+    this.router.navigate(['/registrarse']);
+  }
+
+  limpiarCampos() {
+    if (this.emailInput) {
+      this.emailInput.value = '';
+    }
+    if (this.passwordInput) {
+      this.passwordInput.value = '';
+    }
   }
 }

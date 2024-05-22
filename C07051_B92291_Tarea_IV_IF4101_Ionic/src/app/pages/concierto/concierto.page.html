@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Próximos conciertos</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -18,7 +21,7 @@
       <ion-input type="date" placeholder="Apellido"></ion-input>
       <ion-input type="email" placeholder="Correo"></ion-input>
       <ion-input type="password" placeholder="Contraseña"></ion-input>
-      <ion-button expand="block" class="login-button" type="submit">Confirmar</ion-button>
+      <ion-button routerLink="/usuario" expand="block" class="login-button">{{usuarioSesion?.nombre}}</ion-button>
       <!-- <ion-button expand="block" fill="outline" class="register-button" (click)="atras()">Atrás</ion-button> -->
     </form>
     
