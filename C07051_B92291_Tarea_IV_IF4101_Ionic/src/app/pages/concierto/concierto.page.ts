@@ -13,8 +13,12 @@ export class ConciertoPage implements OnInit{
 
   usuarioSesion = null as any;
 
-  ngOnInit() {
+  ionViewWillEnter(): void {
     this.obtenerUsuarioSesion();
+  }
+
+  ngOnInit() {
+    //this.obtenerUsuarioSesion();
   }
 
   obtenerUsuarioSesion() {
