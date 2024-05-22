@@ -16,6 +16,8 @@ interface Usuario {
 })
 export class UsuarioService {
 
+  // private usuarioSesion: Usuario | null = null;
+
   constructor(private http: HttpClient) { }
 
   private apiUrlUsuario = 'https://localhost:7239/api/Usuario/';
@@ -23,5 +25,13 @@ export class UsuarioService {
   buscarUsuario(correo: string, contrasenna: string): Observable<Usuario> {
     return this.http.get<Usuario>(this.apiUrlUsuario+'BuscarUsuario?correo='+correo+'&contrasenna='+contrasenna);
   }
+
+  // asignarUsuarioSesion(usuarioEncontrado: Usuario){
+  //   this.usuarioSesion = usuarioEncontrado;
+  // }
+
+  // retornarUsuarioSesion(){
+  //   return this.usuarioSesion;
+  // }
 
 }

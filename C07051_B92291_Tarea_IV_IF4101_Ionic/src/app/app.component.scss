@@ -1,0 +1,22 @@
+ion-content {
+    --background: #ffffff; /* Fondo blanco para todo el contenido */
+}
+
+ion-toolbar {
+    --background: #e6e5e5; /* Fondo blanco para todo el contenido */
+    color: #000000;
+}
+
+ion-item{
+    --background: #ffffff; /* Fondo blanco para todo el contenido */
+    color: #000000;
+}
+
+//Esto es muy importante para quitar los bordes de la lista
+.list-md{
+    background:#ffffff;
+}
+
+.cerrar:hover{
+    --background: red;
+}
