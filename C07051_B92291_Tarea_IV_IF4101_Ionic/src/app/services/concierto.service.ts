@@ -22,4 +22,8 @@ export class ConciertoService {
   listarConciertos(): Observable<Concierto[]> {
     return this.http.get<Concierto[]>(this.apiUrlConcierto+'ListarConciertos');
   }
+
+  buscarConciertoPorId(idConcierto: string): Observable<Concierto> {
+    return this.http.get<Concierto>(this.apiUrlConcierto+'BuscarConciertoPorId/'+idConcierto);
+  }
 }

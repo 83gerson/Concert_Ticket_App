@@ -40,7 +40,6 @@ export class ConciertoPage implements OnInit{
     if (usuarioSesion) {
       const datosUsuario = JSON.parse(usuarioSesion);
       this.usuarioSesion = datosUsuario;
-      console.log(JSON.stringify(this.usuarioSesion));
     } else {
       console.error("No se encontraron datos de usuario en sessionStorage");
     }

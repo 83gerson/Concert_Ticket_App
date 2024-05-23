@@ -24,6 +24,11 @@ const routes: Routes = [
     path: 'historial',
     loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
   },
+  {
+    path: 'ver-concierto/:id',
+    loadChildren: () => import('./pages/ver-concierto/ver-concierto.module').then( m => m.VerConciertoPageModule)
+  },
+
 
 ];
 
