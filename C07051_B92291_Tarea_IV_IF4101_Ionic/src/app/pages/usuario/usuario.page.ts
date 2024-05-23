@@ -24,6 +24,10 @@ export class UsuarioPage {
   login() {
     const email = this.emailInput.value?.toString();
     const password = this.passwordInput.value?.toString();
+    if (!email || !password) {
+      console.log('Error: Ambos campos son obligatorios');
+      return;
+    }
     // Verificamos los datos del formulario
     if (email !== undefined && password !== undefined) {
       this.usuarioService.buscarUsuario(email, password).subscribe(response => {

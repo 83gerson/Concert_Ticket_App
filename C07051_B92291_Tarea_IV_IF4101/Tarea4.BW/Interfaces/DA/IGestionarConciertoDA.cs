@@ -11,5 +11,6 @@ namespace Tarea4.BW.Interfaces.DA
     public interface IGestionarConciertoDA
     {
         public Task<IEnumerable<Concierto>> listarConciertos();
+        public Task<Concierto> buscarConciertoPorId(int idConcierto);
     }
 }

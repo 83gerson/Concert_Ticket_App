@@ -21,5 +21,11 @@ namespace Tarea4.Api.Controllers
         {
             return await gestionarConciertoBW.listarConciertos();
         }
+
+        [HttpGet("BuscarConciertoPorId/{idConcierto}")]
+        public async Task<Concierto> buscarConciertoPorId(int idConcierto)
+        {
+            return await gestionarConciertoBW.buscarConciertoPorId(idConcierto);
+        }
     }
 }
