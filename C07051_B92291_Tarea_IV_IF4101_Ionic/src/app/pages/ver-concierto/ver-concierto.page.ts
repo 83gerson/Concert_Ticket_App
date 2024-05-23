@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AsientoService } from 'src/app/services/asiento.service';
 import { ConciertoService } from 'src/app/services/concierto.service';
 import { ZonaService } from 'src/app/services/zona.service';
 
@@ -17,17 +18,11 @@ export class VerConciertoPage implements OnInit {
   zonas: any[] = [];
 
   asientosSeleccionados: any[] = [];
-  asientos: any[] = [
-    { id: 1, nombre: 'Asiento 1' },
-    { id: 2, nombre: 'Asiento 2' },
-    { id: 3, nombre: 'Asiento 3' },
-    { id: 4, nombre: 'Asiento 4' },
-    { id: 5, nombre: 'Asiento 5' }
-  ];
+  asientos: any[] = [];
 
-  constructor(private actRoute: ActivatedRoute, private conciertoService: ConciertoService, private zonaService: ZonaService) 
+  constructor(private actRoute: ActivatedRoute, private conciertoService: ConciertoService, private zonaService: ZonaService, private asientoService: AsientoService) 
   { 
-    this.conciertoId = this.actRoute.snapshot.paramMap.get('id') as string
+    this.conciertoId = this.actRoute.snapshot.paramMap.get('id') as string;
     console.log(this.conciertoId);
   }
 
@@ -39,10 +34,18 @@ export class VerConciertoPage implements OnInit {
     this.obtenerZonas();
   }
 
+  ejem(){
+    console.log(this.asientosSeleccionados);
+  }
+
   limitarAsientos() {
     if (this.asientosSeleccionados.length > this.limiteAsientos) {
       this.asientosSeleccionados = this.asientosSeleccionados.slice(0, this.limiteAsientos);
     }
+  }
+
+  cambiarZona(idZonaSeleccionada: string) {
+    this.obtenerAsientos(idZonaSeleccionada);
   }
 
   formatearFecha(fecha: string): string {
@@ -68,6 +71,16 @@ export class VerConciertoPage implements OnInit {
   obtenerZonas(){
     this.zonaService.buscarZonasPorConcierto(this.conciertoId).subscribe(response => {
       this.zonas = response;
+      //Obtener los asientos la primera vez
+      if (this.zonas.length > 0) {
+        this.obtenerAsientos(this.zonas[0].idZona);
+      }
+    });
+  }
+
+  obtenerAsientos(idZona: string){
+    this.asientoService.buscarAsientosDisponibles(this.conciertoId, idZona).subscribe(response => {
+      this.asientos = response;
     });
   }
 }

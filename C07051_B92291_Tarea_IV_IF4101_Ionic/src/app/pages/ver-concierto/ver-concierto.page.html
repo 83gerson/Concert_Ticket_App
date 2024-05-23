@@ -31,18 +31,18 @@
             </ion-item>
             <br>
             <ion-item>
-              <ion-select placeholder="Zona">
-                <ion-select-option value="zona.idZona" *ngFor="let zona of zonas">{{ zona.nombre }}</ion-select-option>
+              <ion-select placeholder="Zona" (ionChange)="cambiarZona($event.target.value)">
+                <ion-select-option *ngFor="let zona of zonas" [value]="zona.idZona">{{ zona.nombre }}</ion-select-option>
               </ion-select>
             </ion-item>
             <br>
             <ion-item>
-              <ion-select placeholder="Asientos" multiple="true" [(ngModel)]="asientosSeleccionados" (ionChange)="limitarAsientos()">
-                <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.id">{{asiento.nombre}}</ion-select-option>
+              <ion-select *ngIf="zonas" placeholder="Asientos" multiple="true" [(ngModel)]="asientosSeleccionados" (ionChange)="limitarAsientos()">
+                <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.idAsiento">{{asiento.numero}}</ion-select-option>
               </ion-select>
             </ion-item>
             <br>
-            <ion-button expand="block" class="confirm-button">Confirmar</ion-button>
+            <ion-button expand="block" class="confirm-button" (click)="ejem()">Confirmar</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
