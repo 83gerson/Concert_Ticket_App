@@ -23,7 +23,8 @@ builder.Services.AddTransient<IGestionarAsientoBW, GestionarAsientoBW>();
 builder.Services.AddTransient<IGestionarAsientoDA, GestionarAsientoDA>();
 builder.Services.AddTransient<IGestionarReservaBW, GestionarReservaBW>();
 builder.Services.AddTransient<IGestionarReservaDA, GestionarReservaDA>();
-
+builder.Services.AddTransient<IGestionarZonaBW, GestionarZonaBW>();
+builder.Services.AddTransient<IGestionarZonaDA, GestionarZonaDA>();
 
 //Conexión a BD
 builder.Services.AddDbContext<Tarea4Context>(options =>
