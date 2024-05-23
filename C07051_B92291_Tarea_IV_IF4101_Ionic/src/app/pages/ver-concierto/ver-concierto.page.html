@@ -32,9 +32,7 @@
             <br>
             <ion-item>
               <ion-select placeholder="Zona">
-                <ion-select-option value="valor1">1</ion-select-option>
-                <ion-select-option value="valor2">2</ion-select-option>
-                <ion-select-option value="valor3">3</ion-select-option>
+                <ion-select-option value="zona.idZona" *ngFor="let zona of zonas">{{ zona.nombre }}</ion-select-option>
               </ion-select>
             </ion-item>
             <br>
