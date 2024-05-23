@@ -9,12 +9,12 @@
       <h1>SHOWS</h1>
     </div>
 
-    <form >
-      <ion-input type="text" placeholder="Nombre"></ion-input> 
-      <ion-input type="text" placeholder="Apellido"></ion-input>
-      <ion-input type="date" placeholder="Apellido"></ion-input>
-      <ion-input type="email" placeholder="Correo"></ion-input>
-      <ion-input type="password" placeholder="Contraseña"></ion-input>
+    <form (ngSubmit)="confirmar()">
+      <ion-input [(ngModel)]="usuario.nombre" name="nombre" type="text" placeholder="Nombre"></ion-input> 
+      <ion-input [(ngModel)]="usuario.apellidos" name="apellidos" type="text" placeholder="Apellido"></ion-input>
+      <ion-input [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento" type="date" placeholder="Fecha de Nacimiento"></ion-input>
+      <ion-input [(ngModel)]="usuario.correo" name="correo" type="email" placeholder="Correo"></ion-input>
+      <ion-input [(ngModel)]="usuario.contrasenna" name="contrasenna" type="password" placeholder="Contraseña"></ion-input>
       <ion-button expand="block" class="login-button" type="submit">Confirmar</ion-button>
       <ion-button expand="block" fill="outline" class="register-button" (click)="atras()">Atrás</ion-button>
     </form>
