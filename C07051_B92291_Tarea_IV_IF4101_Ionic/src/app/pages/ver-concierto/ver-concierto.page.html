@@ -21,6 +21,30 @@
                 <p>{{concierto.lugar}}</p>
               </ion-card-content>
             </ion-card>
+            <br>
+            <ion-item>
+              <ion-select placeholder="Cantidad Asientos" [(ngModel)]="limiteAsientos">
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-select placeholder="Zona">
+                <ion-select-option value="valor1">1</ion-select-option>
+                <ion-select-option value="valor2">2</ion-select-option>
+                <ion-select-option value="valor3">3</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-select placeholder="Asientos" multiple="true" [(ngModel)]="asientosSeleccionados" (ionChange)="limitarAsientos()">
+                <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.id">{{asiento.nombre}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <br>
+            <ion-button expand="block" class="confirm-button">Confirmar</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

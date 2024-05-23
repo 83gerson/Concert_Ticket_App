@@ -11,6 +11,16 @@ export class VerConciertoPage implements OnInit {
 
   conciertoId: string = '';
   concierto = null as any;
+  limiteAsientos: number = 3;
+
+  asientosSeleccionados: any[] = [];
+  asientos: any[] = [
+    { id: 1, nombre: 'Asiento 1' },
+    { id: 2, nombre: 'Asiento 2' },
+    { id: 3, nombre: 'Asiento 3' },
+    { id: 4, nombre: 'Asiento 4' },
+    { id: 5, nombre: 'Asiento 5' }
+  ];
 
   constructor(private actRoute: ActivatedRoute, private conciertoService: ConciertoService) 
   { 
@@ -23,6 +33,12 @@ export class VerConciertoPage implements OnInit {
 
   ionViewWillEnter() {
     this.obtenerConcierto();
+  }
+
+  limitarAsientos() {
+    if (this.asientosSeleccionados.length > this.limiteAsientos) {
+      this.asientosSeleccionados = this.asientosSeleccionados.slice(0, this.limiteAsientos);
+    }
   }
 
   formatearFecha(fecha: string): string {
