@@ -7,7 +7,17 @@
       <ion-title>Historial</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-content [fullscreen]="true" class="ion-padding">
-    
+    <ion-card *ngFor="let reserva of reservas">
+      <ion-card-header>
+        Reserva {{ reserva.idReserva }}
+      </ion-card-header>
+      <ion-card-content>
+        <p>Nombre del usuario: {{ reserva.nombreUsuario }}</p>
+        <p>Nombre del concierto: {{ reserva.nombreConcierto }}</p>
+        <p>Zona: {{ reserva.nombreZona }}</p>
+      </ion-card-content>
+    </ion-card>
   </ion-content>
 </ion-app>

@@ -10,3 +10,12 @@ ion-toolbar {
 ion-menu-button {
     color: blue;
 }
+
+ion-card {
+    background: #FFF;
+}
+
+ion-card:hover {
+    cursor: pointer;
+    background: rgba(7, 7, 7, 0.485);
+}

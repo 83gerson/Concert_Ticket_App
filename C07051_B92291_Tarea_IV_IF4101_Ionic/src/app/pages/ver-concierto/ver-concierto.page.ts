@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConciertoService } from 'src/app/services/concierto.service';
+import { ZonaService } from 'src/app/services/zona.service';
 
 @Component({
   selector: 'app-ver-concierto',
@@ -13,6 +14,8 @@ export class VerConciertoPage implements OnInit {
   concierto = null as any;
   limiteAsientos: number = 3;
 
+  zonas: any[] = [];
+
   asientosSeleccionados: any[] = [];
   asientos: any[] = [
     { id: 1, nombre: 'Asiento 1' },
@@ -22,7 +25,7 @@ export class VerConciertoPage implements OnInit {
     { id: 5, nombre: 'Asiento 5' }
   ];
 
-  constructor(private actRoute: ActivatedRoute, private conciertoService: ConciertoService) 
+  constructor(private actRoute: ActivatedRoute, private conciertoService: ConciertoService, private zonaService: ZonaService) 
   { 
     this.conciertoId = this.actRoute.snapshot.paramMap.get('id') as string
     console.log(this.conciertoId);
@@ -33,6 +36,7 @@ export class VerConciertoPage implements OnInit {
 
   ionViewWillEnter() {
     this.obtenerConcierto();
+    this.obtenerZonas();
   }
 
   limitarAsientos() {
@@ -58,6 +62,12 @@ export class VerConciertoPage implements OnInit {
       error: (error: any) => {
         console.error('Error al obtener el concierto', error);
       }
+    });
+  }
+
+  obtenerZonas(){
+    this.zonaService.buscarZonasPorConcierto(this.conciertoId).subscribe(response => {
+      this.zonas = response;
     });
   }
 }
