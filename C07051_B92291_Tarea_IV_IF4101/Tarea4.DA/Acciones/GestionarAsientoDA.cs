@@ -44,5 +44,18 @@ namespace Tarea4.DA.Acciones
 
             return asientos;
         }
+
+        public async Task<Asiento> buscarAsientoPorId(int idAsiento)
+        {
+            var asientoDA = await tarea4Context.AsientoDA.FirstOrDefaultAsync(c => c.idAsiento == idAsiento);
+
+            Asiento asiento = new()
+            {
+                idAsiento = asientoDA.idAsiento,
+                numero = asientoDA.numero,
+            };
+
+            return asiento;
+        }
     }
 }

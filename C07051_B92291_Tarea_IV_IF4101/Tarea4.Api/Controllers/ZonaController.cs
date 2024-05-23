@@ -21,5 +21,11 @@ namespace Tarea4.Api.Controllers
         {
             return await gestionarZonaBW.buscarZonasPorConcierto(idConcierto);
         }
+
+        [HttpGet("buscarZonaPorConciertoYAsiento")]
+        public async Task<Zona> buscarZonaPorConciertoYAsiento(int idConcierto, int idAsiento)
+        {
+            return await gestionarZonaBW.buscarZonaPorConciertoYAsiento(idConcierto, idAsiento);
+        }
     }
 }

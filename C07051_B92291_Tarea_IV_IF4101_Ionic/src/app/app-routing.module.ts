@@ -20,6 +20,11 @@ const routes: Routes = [
     path: 'registrarse',
     loadChildren: () => import('./pages/registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
   },
+  {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
+  },
+
 ];
 
 @NgModule({

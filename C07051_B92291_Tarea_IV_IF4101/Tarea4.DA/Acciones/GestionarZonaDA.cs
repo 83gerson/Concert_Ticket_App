@@ -19,6 +19,20 @@ namespace Tarea4.DA.Acciones
             this.tarea4Context = tarea4Context;
         }
 
+        public async Task<Zona> buscarZonaPorConciertoYAsiento(int idConcierto, int idAsiento)
+        {
+            var zona = await tarea4Context.conciertoAsientoDA
+                .Where(ca => ca.idConcierto == idConcierto && ca.idAsiento == idAsiento)
+                .Select(ca => new Zona
+                {
+                    idZona = ca.ZonaAsociado.idZona,
+                    nombre = ca.ZonaAsociado.nombre
+                })
+                .FirstOrDefaultAsync();
+
+            return zona;
+        }
+
         public async Task<IEnumerable<Zona>> buscarZonasPorConcierto(int idConcierto)
         {
             var zonas = await tarea4Context.conciertoZonaDA

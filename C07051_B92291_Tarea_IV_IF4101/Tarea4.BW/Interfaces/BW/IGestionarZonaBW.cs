@@ -10,5 +10,6 @@ namespace Tarea4.BW.Interfaces.BW
     public interface IGestionarZonaBW
     {
         public Task<IEnumerable<Zona>> buscarZonasPorConcierto(int idConcierto);
+        public Task<Zona> buscarZonaPorConciertoYAsiento(int idConcierto, int idAsiento);
     }
 }

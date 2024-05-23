@@ -22,5 +22,10 @@ namespace Tarea4.BW.CU
         {
             return await gestionarAsientoDA.buscarAsientosDisponibles(idConcierto, idZona);
         }
+
+        public async Task<Asiento> buscarAsientoPorId(int idAsiento)
+        {
+            return await gestionarAsientoDA.buscarAsientoPorId(idAsiento);
+        }
     }
 }
