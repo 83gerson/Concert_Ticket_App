@@ -18,6 +18,11 @@ namespace Tarea4.BW.CU
             this.gestionarConciertoDA = gestionarConciertoDA;
         }
 
+        public async Task<Concierto> buscarConciertoPorId(int idConcierto)
+        {
+            return await gestionarConciertoDA.buscarConciertoPorId(idConcierto);
+        }
+
         public async Task<IEnumerable<Concierto>> listarConciertos()
         {
             return await gestionarConciertoDA.listarConciertos();
