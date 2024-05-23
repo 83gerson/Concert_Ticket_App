@@ -22,25 +22,19 @@
               </ion-card-content>
             </ion-card>
             <br>
-            <ion-item>
-              <ion-select placeholder="Cantidad Asientos" [(ngModel)]="limiteAsientos">
-                <ion-select-option value="1">1</ion-select-option>
-                <ion-select-option value="2">2</ion-select-option>
-                <ion-select-option value="3">3</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <ion-select placeholder="Cantidad Asientos" [(ngModel)]="limiteAsientos">
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2">2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+            </ion-select>
             <br>
-            <ion-item>
-              <ion-select placeholder="Zona" (ionChange)="cambiarZona($event.target.value)">
-                <ion-select-option *ngFor="let zona of zonas" [value]="zona.idZona">{{ zona.nombre }}</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <ion-select placeholder="Zona" (ionChange)="cambiarZona($event.target.value)">
+              <ion-select-option *ngFor="let zona of zonas" [value]="zona.idZona">{{ zona.nombre }}</ion-select-option>
+            </ion-select>
             <br>
-            <ion-item>
-              <ion-select *ngIf="zonas" placeholder="Asientos" multiple="true" [(ngModel)]="asientosSeleccionados" (ionChange)="limitarAsientos()">
-                <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.idAsiento">{{asiento.numero}}</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <ion-select *ngIf="zonas" placeholder="Asientos" multiple="true" [(ngModel)]="asientosSeleccionados" (ionChange)="limitarAsientos()">
+              <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.idAsiento">{{asiento.numero}}</ion-select-option>
+            </ion-select>
             <br>
             <ion-button expand="block" class="confirm-button" (click)="ejem()">Confirmar</ion-button>
           </ion-col>

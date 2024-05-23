@@ -36,6 +36,17 @@ ion-img {
     object-fit: cover;
 }
 
+
+/* Aumentar la especificidad */
+ion-select {
+    background-color: #ffffff;
+    color: #000;
+    font-weight: bold;
+    border: 1px solid #bdbdbd;
+    padding: 0.5em;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
