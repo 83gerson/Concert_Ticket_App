@@ -1,29 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Próximos conciertos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Próximos conciertos</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="main-container">
-    <ion-img src="/assets/icon/InicioSesion.png" class="login-icon"></ion-img>
-    <div class="app-title">
-      <h1>MUNDI</h1>
-      <h1>SHOWS</h1>
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <div class="main-container">
+      <ion-grid>
+        <ion-row>
+          <ion-col routerLink="/concierto" *ngFor="let c of conciertos" size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-card>
+              <ion-img src="/assets/images/{{c.imagen}}" class="full-img"></ion-img>
+              <ion-card-content>
+                <p>{{c.artista}}</p>
+                <div class="name">{{c.fechaEvento}}</div>
+                <p>{{c.lugar}}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
-
-    <form >
-      <ion-input type="text" placeholder="Nombre"></ion-input> 
-      <ion-input type="text" placeholder="Apellido"></ion-input>
-      <ion-input type="date" placeholder="Apellido"></ion-input>
-      <ion-input type="email" placeholder="Correo"></ion-input>
-      <ion-input type="password" placeholder="Contraseña"></ion-input>
-      <ion-button routerLink="/usuario" expand="block" class="login-button">{{usuarioSesion?.nombre}}</ion-button>
-      <!-- <ion-button expand="block" fill="outline" class="register-button" (click)="atras()">Atrás</ion-button> -->
-    </form>
-    
-  </div>
-</ion-content>
+  </ion-content>
+</ion-app>
