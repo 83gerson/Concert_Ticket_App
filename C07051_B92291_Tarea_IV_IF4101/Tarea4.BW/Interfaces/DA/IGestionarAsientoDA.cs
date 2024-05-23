@@ -10,5 +10,7 @@ namespace Tarea4.BW.Interfaces.DA
     public interface IGestionarAsientoDA
     {
         Task<IEnumerable<Asiento>> buscarAsientosDisponibles(int idConcierto, int idZona);
+
+        public Task<Asiento> buscarAsientoPorId(int idAsiento);
     }
 }
