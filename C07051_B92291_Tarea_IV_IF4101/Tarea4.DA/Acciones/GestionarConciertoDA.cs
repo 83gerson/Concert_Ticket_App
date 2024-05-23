@@ -20,6 +20,22 @@ namespace Tarea4.DA.Acciones
             this.tarea4Context = tarea4Context;
         }
 
+        public async Task<Concierto> buscarConciertoPorId(int idConcierto)
+        {
+            var conciertoDA = await tarea4Context.ConciertoDA.FirstOrDefaultAsync(c => c.idConcierto == idConcierto);
+
+            Concierto concierto = new()
+            {
+                idConcierto = conciertoDA.idConcierto,
+                artista = conciertoDA.artista,
+                imagen = conciertoDA.imagen,
+                fechaEvento = conciertoDA.fechaEvento,
+                lugar = conciertoDA.lugar
+            };
+
+            return concierto;
+        }
+
         public async Task<IEnumerable<Concierto>> listarConciertos()
         {
             return await tarea4Context.ConciertoDA.
