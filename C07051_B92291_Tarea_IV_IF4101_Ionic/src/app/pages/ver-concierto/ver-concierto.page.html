@@ -1,0 +1,53 @@
+<ion-app>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Compra de Boletos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <div class="main-container">
+      <ion-grid *ngIf="concierto">
+        <ion-row>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-card>
+              <ion-img src="/assets/images/{{concierto.imagen}}" class="full-img"></ion-img>
+              <ion-card-content>
+                <p>{{concierto.artista}}</p>
+                <div class="name">{{concierto.fechaEvento}}</div>
+                <p>{{concierto.lugar}}</p>
+              </ion-card-content>
+            </ion-card>
+            <br>
+            <ion-item>
+              <ion-select placeholder="Cantidad Asientos" [(ngModel)]="limiteAsientos">
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-select placeholder="Zona">
+                <ion-select-option value="valor1">1</ion-select-option>
+                <ion-select-option value="valor2">2</ion-select-option>
+                <ion-select-option value="valor3">3</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-select placeholder="Asientos" multiple="true" [(ngModel)]="asientosSeleccionados" (ionChange)="limitarAsientos()">
+                <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.id">{{asiento.nombre}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <br>
+            <ion-button expand="block" class="confirm-button">Confirmar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+</ion-app>

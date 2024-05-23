@@ -12,7 +12,7 @@
     <div class="main-container">
       <ion-grid>
         <ion-row>
-          <ion-col routerLink="/concierto" *ngFor="let c of conciertos" size-lg="6" size-md="6" size-sm="12" size="12">
+          <ion-col routerLink="/ver-concierto/{{c.idConcierto}}" *ngFor="let c of conciertos" size-lg="6" size-md="6" size-sm="12" size="12">
             <ion-card>
               <ion-img src="/assets/images/{{c.imagen}}" class="full-img"></ion-img>
               <ion-card-content>
