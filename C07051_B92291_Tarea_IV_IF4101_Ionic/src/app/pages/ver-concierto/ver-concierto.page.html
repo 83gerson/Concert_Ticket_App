@@ -4,7 +4,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Compra de Boletos</ion-title>
+      <ion-title>Compra de boletos</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -28,7 +28,7 @@
               <ion-select-option value="3">3</ion-select-option>
             </ion-select>
             <br>
-            <ion-select placeholder="Zona" (ionChange)="cambiarZona($event.target.value)">
+            <ion-select placeholder="Zona" [(ngModel)]="zonaSeleccionada" (ionChange)="cambiarZona($event.target.value)">
               <ion-select-option *ngFor="let zona of zonas" [value]="zona.idZona">{{ zona.nombre }}</ion-select-option>
             </ion-select>
             <br>
@@ -36,7 +36,7 @@
               <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.idAsiento">{{asiento.numero}}</ion-select-option>
             </ion-select>
             <br>
-            <ion-button expand="block" class="confirm-button" (click)="ejem()">Confirmar</ion-button>
+            <ion-button expand="block" class="confirm-button" (click)="reservar()">Confirmar</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

@@ -16,6 +16,7 @@ export class VerConciertoPage implements OnInit {
   limiteAsientos: number = 3;
 
   zonas: any[] = [];
+  zonaSeleccionada: string = '';
 
   asientosSeleccionados: any[] = [];
   asientos: any[] = [];
@@ -34,8 +35,12 @@ export class VerConciertoPage implements OnInit {
     this.obtenerZonas();
   }
 
-  ejem(){
+  reservar(){
+    console.log(this.concierto);
+    console.log(this.zonaSeleccionada);
     console.log(this.asientosSeleccionados);
+    sessionStorage.setItem('zonaElegida', this.zonaSeleccionada);
+    sessionStorage.setItem('asientosSeleccionados', JSON.stringify(this.asientosSeleccionados));
   }
 
   limitarAsientos() {
