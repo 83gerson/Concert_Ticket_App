@@ -19,6 +19,16 @@ namespace Tarea4.DA.Acciones
             this.tarea4Context = tarea4Context;
         }
 
+        public async Task<decimal> buscarPrecioZona(int idConcierto, int idZona)
+        {
+            decimal precioReserva = await tarea4Context.conciertoZonaDA
+                .Where(cz => cz.idZona == idZona && cz.idConcierto == idConcierto)
+                .Select(cz => cz.precio)
+                .FirstOrDefaultAsync();
+
+            return precioReserva;
+        }
+
         public async Task<Zona> buscarZonaPorConciertoYAsiento(int idConcierto, int idAsiento)
         {
             var zona = await tarea4Context.conciertoAsientoDA

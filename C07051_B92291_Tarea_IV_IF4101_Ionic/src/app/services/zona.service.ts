@@ -24,4 +24,8 @@ export class ZonaService {
     return this.http.get<Zona>(this.apiUrlZona+'buscarZonaPorConciertoYAsiento?idConcierto='+idConcierto+'&idAsiento='+idAsiento);
   }
 
+  buscarPrecioZona(idConcierto: string, idZona: string):Observable<number> {
+    return this.http.get<number>(this.apiUrlZona+'BuscarPrecioDeZona?idConcierto='+idConcierto+'&idZona='+idZona);
+  }
+
 }

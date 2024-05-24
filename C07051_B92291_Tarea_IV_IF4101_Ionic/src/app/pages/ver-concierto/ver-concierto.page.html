@@ -33,7 +33,7 @@
             </ion-select>
             <br>
             <ion-select *ngIf="zonas" placeholder="Asientos" multiple="true" [(ngModel)]="asientosSeleccionados" (ionChange)="limitarAsientos()">
-              <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.idAsiento">{{asiento.numero}}</ion-select-option>
+              <ion-select-option *ngFor="let asiento of asientos" [value]="asiento.idAsiento">{{asiento.numero}} - ₡{{ precioZonaSleccionada }}</ion-select-option>
             </ion-select>
             <br>
             <ion-button expand="block" class="confirm-button" (click)="reservar()">Confirmar</ion-button>

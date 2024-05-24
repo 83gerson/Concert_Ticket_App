@@ -11,5 +11,6 @@ namespace Tarea4.BW.Interfaces.BW
     {
         public Task<IEnumerable<Zona>> buscarZonasPorConcierto(int idConcierto);
         public Task<Zona> buscarZonaPorConciertoYAsiento(int idConcierto, int idAsiento);
+        public Task<decimal> buscarPrecioZona(int idConcierto, int idZona);
     }
 }
