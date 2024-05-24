@@ -27,4 +27,12 @@ export class ReservaService {
     return this.http.get<number>(this.apiUrlReserva+'calcularTota/'+idReserva);
   }
 
+  buscarIdDisponile(): Observable<number> {
+    return this.http.get<number>(this.apiUrlReserva+'buscarIdDisponible');
+  }
+
+  registrarReserva(reserva: Reserva): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrlReserva}RegistrarReserva`, reserva);
+  }
+
 }

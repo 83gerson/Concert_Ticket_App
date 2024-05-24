@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tarea4.DA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf7e68eea7f5b670979d234fcfdd54ab4f462d49")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1903866da3b48f185891e1e1d015ef351d1bc501")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tarea4.DA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tarea4.DA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

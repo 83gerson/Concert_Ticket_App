@@ -32,5 +32,10 @@ namespace Tarea4.BW.CU
         {
             return await gestionarReservaDA.listarReservasPorUsuario(idUsuario);
         }
+
+        public async Task<bool> registrarReseva(Reserva reserva)
+        {
+            return await gestionarReservaDA.registrarReseva(reserva);
+        }
     }
 }

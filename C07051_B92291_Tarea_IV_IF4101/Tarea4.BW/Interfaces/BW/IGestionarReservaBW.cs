@@ -12,5 +12,6 @@ namespace Tarea4.BW.Interfaces.BW
         Task<IEnumerable<Reserva>> listarReservasPorUsuario(int idUsuario);
         Task<int> buscarIdDisponible();
         Task<decimal> calcularTotal(int idReserva);
+        Task<bool> registrarReseva(Reserva reserva);
     }
 }
