@@ -27,5 +27,11 @@ namespace Tarea4.Api.Controllers
         {
             return await gestionarZonaBW.buscarZonaPorConciertoYAsiento(idConcierto, idAsiento);
         }
+
+        [HttpGet("BuscarPrecioDeZona")]
+        public async Task<decimal> buscarPrecioZona(int idConcierto, int idZona)
+        {
+            return await gestionarZonaBW.buscarPrecioZona(idConcierto, idZona);
+        }
     }
 }

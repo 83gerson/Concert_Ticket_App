@@ -18,6 +18,11 @@ namespace Tarea4.BW.CU
             this.gestionarZonaDA = gestionarZonaDA;
         }
 
+        public async Task<decimal> buscarPrecioZona(int idConcierto, int idZona)
+        {
+            return await gestionarZonaDA.buscarPrecioZona(idConcierto, idZona);
+        }
+
         public async Task<Zona> buscarZonaPorConciertoYAsiento(int idConcierto, int idAsiento)
         {
             return await gestionarZonaDA.buscarZonaPorConciertoYAsiento(idConcierto, idAsiento);

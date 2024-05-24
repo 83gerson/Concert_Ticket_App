@@ -17,6 +17,7 @@ export class VerConciertoPage implements OnInit {
 
   zonas: any[] = [];
   zonaSeleccionada: string = '';
+  precioZonaSleccionada: number = 0;
 
   asientosSeleccionados: any[] = [];
   asientos: any[] = [];
@@ -36,9 +37,6 @@ export class VerConciertoPage implements OnInit {
   }
 
   reservar(){
-    console.log(this.concierto);
-    console.log(this.zonaSeleccionada);
-    console.log(this.asientosSeleccionados);
     sessionStorage.setItem('zonaElegida', this.zonaSeleccionada);
     sessionStorage.setItem('asientosSeleccionados', JSON.stringify(this.asientosSeleccionados));
     this.router.navigate(['/crear-reserva/', this.conciertoId]);
@@ -52,6 +50,7 @@ export class VerConciertoPage implements OnInit {
 
   cambiarZona(idZonaSeleccionada: string) {
     this.obtenerAsientos(idZonaSeleccionada);
+    this.obtenerPreioZona(idZonaSeleccionada);
   }
 
   formatearFecha(fecha: string): string {
@@ -87,6 +86,14 @@ export class VerConciertoPage implements OnInit {
   obtenerAsientos(idZona: string){
     this.asientoService.buscarAsientosDisponibles(this.conciertoId, idZona).subscribe(response => {
       this.asientos = response;
+    });
+  }
+
+  obtenerPreioZona(idZona: string){
+    this.zonaService.buscarPrecioZona(this.conciertoId, idZona).subscribe(response => {
+      if (response) {
+        this.precioZonaSleccionada = response;
+      }
     });
   }
 }
