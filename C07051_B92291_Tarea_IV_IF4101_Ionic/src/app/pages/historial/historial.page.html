@@ -10,13 +10,14 @@
 
   <ion-content [fullscreen]="true" class="ion-padding">
     <ion-card *ngFor="let reserva of reservas">
-      <ion-card-header>
-        Reserva {{ reserva.idReserva }}
-      </ion-card-header>
       <ion-card-content>
-        <p>Nombre del usuario: {{ reserva.nombreUsuario }}</p>
-        <p>Nombre del concierto: {{ reserva.nombreConcierto }}</p>
-        <p>Zona: {{ reserva.nombreZona }}</p>
+        <ion-img src="/assets/icon/InicioSesion.png" class="reserva-icon"></ion-img>
+        <p>ID de Reserva: {{ reserva.idReserva }}</p>
+        <p>Nombre de Usuario: {{ usuarioSesion.nombre }}</p>
+        <p *ngIf="reserva.concierto">Artista: {{ reserva.concierto.artista }}</p>
+        <p *ngIf="reserva.zona">Zona: {{ reserva.zona.nombre }}</p>
+        <p *ngIf="reserva.asientos && reserva.asientos.length">Número de Asiento: {{ reserva.asientos.join(', ') }}</p>
+        <p *ngIf="reserva.total">Precio Total: ₡{{ reserva.total }}</p>
       </ion-card-content>
     </ion-card>
   </ion-content>
