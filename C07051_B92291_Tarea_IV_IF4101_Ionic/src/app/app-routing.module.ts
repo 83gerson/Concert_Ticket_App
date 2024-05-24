@@ -28,6 +28,11 @@ const routes: Routes = [
     path: 'ver-concierto/:id',
     loadChildren: () => import('./pages/ver-concierto/ver-concierto.module').then( m => m.VerConciertoPageModule)
   },
+  {
+    path: 'crear-reserva/:id',
+    loadChildren: () => import('./pages/crear-reserva/crear-reserva.module').then( m => m.CrearReservaPageModule)
+  },
+
 
 
 ];
