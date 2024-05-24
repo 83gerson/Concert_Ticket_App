@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HistorialService } from 'src/app/services/historial.service';
+import { ConciertoService } from 'src/app/services/concierto.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { ReservaService } from 'src/app/services/reserva.service';
+import { ZonaService } from 'src/app/services/zona.service';
+import { AsientoService } from 'src/app/services/asiento.service';
 
 @Component({
   selector: 'app-historial',
@@ -9,25 +13,45 @@ import { HistorialService } from 'src/app/services/historial.service';
 export class HistorialPage implements OnInit {
 
   reservas: any[] = [];
+  usuarioSesion: any;
 
-  constructor(private historialService: HistorialService) { }
+  constructor(
+    private conciertoService: ConciertoService,
+    private usuarioService: UsuarioService,
+    private reservaService: ReservaService,
+    private zonaService: ZonaService,
+    private asientoService: AsientoService
+  ) { }
 
   ngOnInit() {
-    this.buscarReservasPorUsuario();
+    const usuarioSesionString = sessionStorage.getItem('usuarioSesion');
+    if (usuarioSesionString) {
+      this.usuarioSesion = JSON.parse(usuarioSesionString);
+      console.log('Usuario en sesión:', this.usuarioSesion);
+      this.buscarReservasPorUsuario(this.usuarioSesion.idUsuario);
+    } else {
+      console.error('No hay usuario en sesión');
+    }
   }
 
-  buscarReservasPorUsuario() {
-    // Suponiendo que tienes el ID del usuario almacenado en alguna variable llamada 'idUsuario'
-    const idUsuario = 1; // Reemplaza 1 con el ID real del usuario
+  buscarReservasPorUsuario(idUsuario: number) {
+    this.reservaService.listarReservasPorUsuario(idUsuario).subscribe(
+      (reservas: any) => {
+        console.log('Reservas encontradas:', reservas);
+        const reservasMap = new Map<number, any>();
 
-    this.historialService.buscarReservasPorUsuario(idUsuario).subscribe(
-      (reservas: any[]) => {
-        this.reservas = reservas;
-        // Por cada reserva, llamas a los otros métodos del servicio para obtener información adicional
-        this.reservas.forEach(reserva => {
-          this.buscarConcierto(reserva.idConcierto);
-          this.buscarUsuario(reserva.correo, reserva.contrasenna);
+        reservas.forEach((reserva: any) => {
+          if (!reservasMap.has(reserva.idReserva)) {
+            reservasMap.set(reserva.idReserva, { ...reserva, asientos: [] });
+          }
+          const reservaData = reservasMap.get(reserva.idReserva);
+          this.buscarConcierto(reserva.idConcierto, reservaData);
+          this.buscarZonaPorConciertoYAsiento(reserva.idConcierto, reserva.idAsiento, reservaData);
+          this.buscarAsiento(reserva.idAsiento, reservaData);
+          this.calcularTotal(reserva.idReserva, reservaData);
         });
+
+        this.reservas = Array.from(reservasMap.values());
       },
       error => {
         console.error('Error al buscar reservas:', error);
@@ -35,11 +59,11 @@ export class HistorialPage implements OnInit {
     );
   }
 
-  buscarConcierto(idConcierto: number) {
-    this.historialService.buscarConciertoPorId(idConcierto).subscribe(
+  buscarConcierto(idConcierto: string, reserva: any) {
+    this.conciertoService.buscarConciertoPorId(idConcierto).subscribe(
       (concierto: any) => {
-        // Aquí puedes hacer lo que necesites con la información del concierto
-        console.log('Concierto:', concierto);
+        console.log('Concierto encontrado:', concierto);
+        reserva.concierto = concierto;
       },
       error => {
         console.error('Error al buscar concierto:', error);
@@ -47,16 +71,42 @@ export class HistorialPage implements OnInit {
     );
   }
 
-  buscarUsuario(correo: string, contrasenna: string) {
-    this.historialService.buscarUsuario(correo, contrasenna).subscribe(
-      (usuario: any) => {
-        // Aquí puedes hacer lo que necesites con la información del usuario
-        console.log('Usuario:', usuario);
+  buscarZonaPorConciertoYAsiento(idConcierto: string, idAsiento: string, reserva: any) {
+    this.zonaService.buscarZonaPorConciertoYAsiento(idConcierto, idAsiento).subscribe(
+      (zona: any) => {
+        console.log('Zona encontrada:', zona);
+        reserva.zona = zona;
       },
       error => {
-        console.error('Error al buscar usuario:', error);
+        console.error('Error al buscar zona:', error);
       }
     );
   }
 
+  buscarAsiento(idAsiento: string, reserva: any) {
+    this.asientoService.buscarAsientoPorId(idAsiento).subscribe(
+      (asiento: any) => {
+        console.log('Asiento encontrado:', asiento);
+        if (!reserva.asientos) {
+          reserva.asientos = [];
+        }
+        reserva.asientos.push(asiento.numero);
+      },
+      error => {
+        console.error('Error al buscar asiento:', error);
+      }
+    );
+  }
+
+  calcularTotal(idReserva: number, reserva: any) {
+    this.reservaService.calcularTotal(idReserva).subscribe(
+      (total: number) => {
+        console.log('Total calculado:', total);
+        reserva.total = total;
+      },
+      error => {
+        console.error('Error al calcular total:', error);
+      }
+    );
+  }
 }

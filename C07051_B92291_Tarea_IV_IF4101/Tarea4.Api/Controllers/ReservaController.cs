@@ -33,5 +33,11 @@ namespace Tarea4.Api.Controllers
         {
             return await gestionarReservaBW.buscarIdDisponible();
         }
+
+        [HttpPost("RegistrarReserva")]
+        public async Task<bool> registrarReseva(Reserva reserva)
+        {
+            return await gestionarReservaBW.registrarReseva(reserva);
+        }
     }
 }

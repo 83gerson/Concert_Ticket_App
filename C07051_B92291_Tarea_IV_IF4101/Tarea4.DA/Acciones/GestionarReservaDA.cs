@@ -57,5 +57,25 @@ namespace Tarea4.DA.Acciones
 
             return reservas;
         }
+
+        public async Task<bool> registrarReseva(Reserva reserva)
+        {
+            Entidades.ReservaDA reservaBD = new()
+            {
+                idReserva = reserva.idReserva,
+                idUsuario = reserva.idUsuario,
+                idConcierto = reserva.idConcierto,
+                idAsiento = reserva.idAsiento
+            };
+
+            await tarea4Context.ReservaDA.AddAsync(reservaBD);
+
+            var resultado = await tarea4Context.SaveChangesAsync();
+
+            if (resultado < 0)
+                return false;
+
+            return true;
+        }
     }
 }
