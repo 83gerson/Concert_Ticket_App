@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AsientoService } from 'src/app/services/asiento.service';
 import { ConciertoService } from 'src/app/services/concierto.service';
 import { ZonaService } from 'src/app/services/zona.service';
@@ -21,7 +21,7 @@ export class VerConciertoPage implements OnInit {
   asientosSeleccionados: any[] = [];
   asientos: any[] = [];
 
-  constructor(private actRoute: ActivatedRoute, private conciertoService: ConciertoService, private zonaService: ZonaService, private asientoService: AsientoService) 
+  constructor(private router: Router, private actRoute: ActivatedRoute, private conciertoService: ConciertoService, private zonaService: ZonaService, private asientoService: AsientoService) 
   { 
     this.conciertoId = this.actRoute.snapshot.paramMap.get('id') as string;
     console.log(this.conciertoId);
@@ -41,6 +41,7 @@ export class VerConciertoPage implements OnInit {
     console.log(this.asientosSeleccionados);
     sessionStorage.setItem('zonaElegida', this.zonaSeleccionada);
     sessionStorage.setItem('asientosSeleccionados', JSON.stringify(this.asientosSeleccionados));
+    this.router.navigate(['/crear-reserva/', this.conciertoId]);
   }
 
   limitarAsientos() {

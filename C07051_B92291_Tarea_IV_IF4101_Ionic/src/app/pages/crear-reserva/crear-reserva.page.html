@@ -1,0 +1,37 @@
+<ion-app>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Medio de pago</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <div class="main-container">
+      <ion-grid *ngIf="concierto">
+        <ion-row>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-card>
+              <ion-img src="/assets/images/{{concierto.imagen}}" class="full-img"></ion-img>
+              <ion-card-content>
+                <p>{{concierto.artista}}</p>
+                <div class="name">{{concierto.fechaEvento}}</div>
+                <p>{{concierto.lugar}}</p>
+              </ion-card-content>
+            </ion-card>
+            <form>
+              <ion-input #emailInput type="text" placeholder="TarjetaHabiente"></ion-input>
+              <ion-input #passwordInput type="text" placeholder="Número de Tarjeta"></ion-input>
+              <ion-input #emailInput type="date" placeholder="Fecha de vencimiento"></ion-input>
+              <ion-input #passwordInput type="password" placeholder="CVV"></ion-input>
+            </form>
+            <br>
+            <ion-button expand="block" class="confirm-button" (click)="comprar()">Comprar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+</ion-app>
