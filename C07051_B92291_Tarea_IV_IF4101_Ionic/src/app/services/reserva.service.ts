@@ -6,7 +6,8 @@ interface Reserva {
   idReserva: number,
   idUsuario: number,
   idConcierto: number,
-  idAsiento: number
+  idAsiento: number,
+  total?: number 
 }
 
 @Injectable({
@@ -21,4 +22,9 @@ export class ReservaService {
   listarReservasPorUsuario(idUsuario: number): Observable<Reserva[]> {
     return this.http.get<Reserva[]>(this.apiUrlReserva+'listarReservasPorUsuario/'+idUsuario);
   }
+
+  calcularTotal(idReserva: number): Observable<number> {
+    return this.http.get<number>(this.apiUrlReserva+'calcularTota/'+idReserva);
+  }
+
 }

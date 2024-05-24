@@ -17,6 +17,7 @@
         <p *ngIf="reserva.concierto">Artista: {{ reserva.concierto.artista }}</p>
         <p *ngIf="reserva.zona">Zona: {{ reserva.zona.nombre }}</p>
         <p *ngIf="reserva.asientos && reserva.asientos.length">Número de Asiento: {{ reserva.asientos.join(', ') }}</p>
+        <p *ngIf="reserva.total">Precio Total: ₡{{ reserva.total }}</p>
       </ion-card-content>
     </ion-card>
   </ion-content>

@@ -44,9 +44,11 @@ export class HistorialPage implements OnInit {
           if (!reservasMap.has(reserva.idReserva)) {
             reservasMap.set(reserva.idReserva, { ...reserva, asientos: [] });
           }
-          this.buscarConcierto(reserva.idConcierto, reservasMap.get(reserva.idReserva));
-          this.buscarZonaPorConciertoYAsiento(reserva.idConcierto, reserva.idAsiento, reservasMap.get(reserva.idReserva));
-          this.buscarAsiento(reserva.idAsiento, reservasMap.get(reserva.idReserva));
+          const reservaData = reservasMap.get(reserva.idReserva);
+          this.buscarConcierto(reserva.idConcierto, reservaData);
+          this.buscarZonaPorConciertoYAsiento(reserva.idConcierto, reserva.idAsiento, reservaData);
+          this.buscarAsiento(reserva.idAsiento, reservaData);
+          this.calcularTotal(reserva.idReserva, reservaData);
         });
 
         this.reservas = Array.from(reservasMap.values());
@@ -92,6 +94,18 @@ export class HistorialPage implements OnInit {
       },
       error => {
         console.error('Error al buscar asiento:', error);
+      }
+    );
+  }
+
+  calcularTotal(idReserva: number, reserva: any) {
+    this.reservaService.calcularTotal(idReserva).subscribe(
+      (total: number) => {
+        console.log('Total calculado:', total);
+        reserva.total = total;
+      },
+      error => {
+        console.error('Error al calcular total:', error);
       }
     );
   }
