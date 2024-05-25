@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AsientoService } from 'src/app/services/asiento.service';
 import { ConciertoService } from 'src/app/services/concierto.service';
 import { ZonaService } from 'src/app/services/zona.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ver-concierto',
@@ -13,7 +14,7 @@ export class VerConciertoPage implements OnInit {
 
   conciertoId: string = '';
   concierto = null as any;
-  limiteAsientos: number = 3;
+  limiteAsientos: number = 0;
 
   zonas: any[] = [];
   zonaSeleccionada: string = '';
@@ -22,7 +23,7 @@ export class VerConciertoPage implements OnInit {
   asientosSeleccionados: any[] = [];
   asientos: any[] = [];
 
-  constructor(private router: Router, private actRoute: ActivatedRoute, private conciertoService: ConciertoService, private zonaService: ZonaService, private asientoService: AsientoService) 
+  constructor(private router: Router, private actRoute: ActivatedRoute, private conciertoService: ConciertoService, private zonaService: ZonaService, private asientoService: AsientoService, private alertController: AlertController) 
   { 
     this.conciertoId = this.actRoute.snapshot.paramMap.get('id') as string;
     console.log(this.conciertoId);
@@ -36,10 +37,23 @@ export class VerConciertoPage implements OnInit {
     this.obtenerZonas();
   }
 
-  reservar(){
+  async reservar() {
+    if (!this.zonaSeleccionada || this.asientosSeleccionados.length === 0 || this.asientosSeleccionados.length === this.limiteAsientos) {
+      await this.presentAlert('Error', 'Por favor selecciona una zona, al menos un asiento y no más de 3 asientos');
+      return;
+    }
     sessionStorage.setItem('zonaElegida', this.zonaSeleccionada);
     sessionStorage.setItem('asientosSeleccionados', JSON.stringify(this.asientosSeleccionados));
     this.router.navigate(['/crear-reserva/', this.conciertoId]);
+  }  
+
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['Aceptar']
+    });
+    await alert.present();
   }
 
   limitarAsientos() {
