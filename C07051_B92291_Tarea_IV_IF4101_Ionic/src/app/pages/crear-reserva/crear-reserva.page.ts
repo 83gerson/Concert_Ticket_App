@@ -4,6 +4,8 @@ import { ConciertoService } from 'src/app/services/concierto.service';
 import { AlertController } from '@ionic/angular';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { IonInput } from '@ionic/angular';
+import { EmailJSResponseStatus, init, send } from 'emailjs-com';
+import { ZonaService } from 'src/app/services/zona.service';
 
 @Component({
   selector: 'app-crear-reserva',
@@ -19,15 +21,23 @@ export class CrearReservaPage implements OnInit {
   conciertoId: string = '';
   concierto = null as any;
 
+  precioZonaSleccionada: number = 0;
+
+  fechaActual: Date = new Date();
+  fechaFormateada = `${String(this.fechaActual.getDate()).padStart(2, '0')}-${String(this.fechaActual.getMonth() + 1).padStart(2, '0')}-${this.fechaActual.getFullYear().toString()}
+  `;
+
   constructor(
     private actRoute: ActivatedRoute,
     private conciertoService: ConciertoService,
     private alertController: AlertController,
     private reservaService: ReservaService,
+    private zonaService: ZonaService,
     private router: Router
   ) 
   { 
     this.conciertoId = this.actRoute.snapshot.paramMap.get('id') as string;
+    init('5BRsUkUtWPltRgAML');
     console.log(this.conciertoId);
   }
 
@@ -36,6 +46,7 @@ export class CrearReservaPage implements OnInit {
 
   ionViewWillEnter() {
     this.obtenerConcierto();
+    this.obtenerPrecioZona();
   }
 
   formatearFecha(fecha: string): string {
@@ -56,6 +67,13 @@ export class CrearReservaPage implements OnInit {
         console.error('Error al obtener el concierto', error);
       }
     });
+  }
+
+  obtenerPrecioZona(){
+    const precioSeleccionado = sessionStorage.getItem('precioZona');
+    if (precioSeleccionado) {
+      this.precioZonaSleccionada = parseInt(precioSeleccionado);
+    }
   }
 
   async presentAlert(header: string, message: string) {
@@ -118,7 +136,6 @@ export class CrearReservaPage implements OnInit {
         if (response) {
           console.log("idDisponible: " + response);
           const usuarioSesion = sessionStorage.getItem('usuarioSesion');
-          const zonaSeleccionada = sessionStorage.getItem('zonaElegida');
           const asientosSeleccionados = sessionStorage.getItem('asientosSeleccionados');
 
           let asientosArray: number[] = [];
@@ -130,9 +147,9 @@ export class CrearReservaPage implements OnInit {
           }
 
           const promises = [];
-
+          // Guardamos las promesas respectivas para la reserva por cada asiento
           for (let index = 0; index < asientosArray.length; index++) {
-            if (usuarioSesion && zonaSeleccionada && asientosSeleccionados) {
+            if (usuarioSesion && asientosSeleccionados) {
               const reserva = {
                 idReserva: response,
                 idUsuario: usuario.idUsuario,
@@ -146,7 +163,7 @@ export class CrearReservaPage implements OnInit {
               }));
             }
           }
-
+          // Ejecutamos todas las promesas para inmsertar a la base de datos
           Promise.all(promises).then(results => {
             const funciono = results.some(result => result);
             console.log(funciono ? 1 : 0);
@@ -154,6 +171,8 @@ export class CrearReservaPage implements OnInit {
               this.presentAlert('Registro', 'Reserva Exitosa!');
               this.limpiarCampos();
               this.router.navigate(['/concierto']);
+              // Se llama al enviar correo
+              this.darFormatoYEnviarEmail(response, asientosArray, usuario);
             }
           }).catch(error => {
             console.error('Error en una de las peticiones', error);
@@ -166,6 +185,56 @@ export class CrearReservaPage implements OnInit {
         this.presentAlert('Error', 'Error en el servicio');
       }
     );
+  }
+
+  darFormatoYEnviarEmail(idReserva: number, asientosArray: number[], usuario: any){
+    let valorPrecioTotal = 0;
+    let boletosString = ``;
+    // Se busca la zona respectiva
+
+    this.zonaService.buscarZonaPorConciertoYAsiento(this.conciertoId, JSON.stringify(asientosArray[0])).subscribe(
+      (zona: any) => {
+        console.log('Zona encontrada:', zona);
+        for (let index = 0; index < asientosArray.length; index++) {
+          valorPrecioTotal+=this.precioZonaSleccionada;
+          boletosString+=`
+              --------------------------------------
+              Concierto: ${this.concierto.artista}
+              Fecha de Evento: ${this.concierto.fechaEvento}
+              Lugar: ${this.concierto.lugar}
+              Asiento: A${asientosArray[index]}
+              Tipo Asiento: ${zona.nombre}
+          `;
+        };
+        // Se crea el formato del email
+        var parametrosEmail = {
+            destinatario: usuario.correo, //poner el correo usuario
+            remitente: 'MUNDISHOWS',
+            titulo: 'Comprobante MUNDISHOWS',
+            nombre: usuario.nombre,
+            apellidos: usuario.apellidos,
+            idReserva: idReserva,
+            precioTotal: valorPrecioTotal,
+            fechaActual: this.fechaFormateada,
+            boletos: boletosString
+        };
+
+        // Enviamos el email
+        this.enviarEmail(parametrosEmail);
+      },
+      error => {
+        console.error('Error al buscar zona:', error);
+      }
+    );
+  }
+
+  enviarEmail(templateParams: any) {
+    return send('service_5qnmhtj', 'template_m67lxmr', templateParams)
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+        console.error('FAILED...', err);
+      });
   }
 
   limpiarCampos() {

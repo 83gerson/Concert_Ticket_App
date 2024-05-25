@@ -44,6 +44,7 @@ export class VerConciertoPage implements OnInit {
     }
     sessionStorage.setItem('zonaElegida', this.zonaSeleccionada);
     sessionStorage.setItem('asientosSeleccionados', JSON.stringify(this.asientosSeleccionados));
+    sessionStorage.setItem('precioZona', JSON.stringify(this.precioZonaSleccionada));
     this.router.navigate(['/crear-reserva/', this.conciertoId]);
   }  
 
