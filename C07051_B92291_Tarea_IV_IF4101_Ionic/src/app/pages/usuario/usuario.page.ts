@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInput } from '@ionic/angular';
+import { IonInput, AlertController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -15,22 +15,23 @@ export class UsuarioPage {
 
   usuario: any = null;
 
-  constructor(private router: Router, private usuarioService: UsuarioService) {}
+  constructor(private router: Router, private usuarioService: UsuarioService, private alertController: AlertController) {}
 
   ionViewWillEnter(): void {
     this.limpiarCampos();
   }
 
-  login() {
+  async login() {
     const email = this.emailInput.value?.toString();
     const password = this.passwordInput.value?.toString();
     if (!email || !password) {
       console.log('Error: Ambos campos son obligatorios');
+      await this.presentAlert('Error', 'Por favor llenar ambos campos');
       return;
     }
     // Verificamos los datos del formulario
     if (email !== undefined && password !== undefined) {
-      this.usuarioService.buscarUsuario(email, password).subscribe(response => {
+      this.usuarioService.buscarUsuario(email, password).subscribe(async response => {
         // console.log(response);
         // this.usuarioService.asignarUsuarioSesion(response);
         // console.log(JSON.stringify(this.usuarioService.retornarUsuarioSesion()));
@@ -54,6 +55,8 @@ export class UsuarioPage {
           sessionStorage.setItem('usuarioSesion', JSON.stringify(datosUsuario));
           // Se pasa a la siguiente página
           this.router.navigate(['/concierto']);
+        } else {
+          await this.presentAlert('Error', 'Datos incorrectos');
         }
       });
     }
@@ -71,5 +74,15 @@ export class UsuarioPage {
     if (this.passwordInput) {
       this.passwordInput.value = '';
     }
+  }
+
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }

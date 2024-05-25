@@ -22,10 +22,10 @@
               </ion-card-content>
             </ion-card>
             <form>
-              <ion-input #emailInput type="text" placeholder="TarjetaHabiente"></ion-input>
-              <ion-input #passwordInput type="text" placeholder="Número de Tarjeta"></ion-input>
-              <ion-input #emailInput type="date" placeholder="Fecha de vencimiento"></ion-input>
-              <ion-input #passwordInput type="password" placeholder="CVV"></ion-input>
+              <ion-input #tarjetaHabienteInput type="text" placeholder="TarjetaHabiente"></ion-input>
+              <ion-input #numeroTarjetaInput type="text" placeholder="Número de Tarjeta"></ion-input>
+              <ion-input #fechaVencimientoInput type="date" placeholder="Fecha de vencimiento"></ion-input>
+              <ion-input #cvvInput type="password" maxlength="3" placeholder="CVV"></ion-input>
             </form>
             <br>
             <ion-button expand="block" class="confirm-button" (click)="comprar()">Comprar</ion-button>
